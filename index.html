@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Smart Refrigerator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Dependencies -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Our style sheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <ul class="nav sticky-top nav-pills justify-content-center" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="pill" href="#home"><div class="lg-scrn">Home</div><div class="sm-scrn"><i class="fas fa-home"></i></div></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="#ingredients"><div class="lg-scrn">Ingredients</div><div class="sm-scrn"><i class="fas fa-seedling"></i></div></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="#recipes"><div class="lg-scrn">Recipes</div><div class="sm-scrn"><i class="fas fa-utensils"></i></div></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="#settings"><div class="lg-scrn">Settings</div><div class="sm-scrn"><i class="fas fa-cog"></i></div></a>
+    </li>
+    <li id="cart-tab" class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="#cart"><div class="lg-scrn">Cart</div><div class="sm-scrn"><i class="fas fa-shopping-cart"></i></div></a>
+    </li>
+  </ul>
+
+  <div class="container">
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <!-- Home tab content -->
+    <div id="home" class="container tab-pane active"><br>
+      <div class="row justify-content-around">
+        <div id="date-time" class="col-md-12">
+          <h1 style="color: white">Welcome back, Dory!</h1>
+          <h1 class="big-text" id="temp">70&#8457;</h1>
+          <h1 class="big-text" id="time"></h1>
+          <h4 id="date" style="font-size: 2rem; color: white"></h4>
+        </div>
+        <!-- Quick recipes -->
+        <div id="quick-recipes" class="col-md-5">
+          <h2>Quick Recipes</h2>
+          <div class="col-md-12">
+            <ul class="list">
+              <table id="quick-table" class="table table-hover table-responsive w-100 d-block d-md-table">
+                <tbody>
+                  
+                  <tr onclick="document.getElementById('pbj').style.display='block'"><td><green>PB&J Sandwich</green></td></tr>
+                  <tr class="makeable"><td>3 Envelope Chicken Roast</td></tr>
+                  <tr class="almostMakeable" onclick="document.getElementById('hamburger').style.display='block'"><td>Hamburger</td></tr>
+                  <tr class="almostMakeable" onclick="document.getElementById('scamp').style.display='block'"><td>Shrimp Scampi</td></tr>
+                  <tr class="almostMakeable"><td>8 Hour Beef Stew</td></tr>
+                  <tr class="notMakeable"><td>Cheesy Baked Ravioli</td></tr>
+                  <tr class="notMakeable"><td>Chicken Satay Wraps</td></tr>
+                  <tr class="notMakeable"><td>Spicy Chicken Soup</td></tr>
+                  <tr class="notMakeable"><td>Stir Fried Chicken and Asparagus</td></tr>
+                 
+                </tbody>
+              </table>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Notifications -->
+        <div id="notifications" class="col-md-5">
+          <h2>Notifications</h2>
+          <div class="col-md-12">
+            <ul class="list">
+              <table class="table table-hover table-responsive w-100 d-block d-md-table">
+                <tbody>
+                  <tr onclick="removeNotif(this)"><td>Milk expires in (3) days.</td></tr>
+                  <tr onclick="removeNotif(this)"><td>Try Making our new recipe: <span class="recipe"><i>'Quick Chicken Piccata'.</i></span> You have all the
+                    ingredients!</td></tr>
+                </tbody>
+              </table>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Notes -->
+        <div id="notes" class="col-md-12">
+          <h2 style="padding-top: 1rem">Notes</h2>
+          <div class="col text-center">
+            <button style="width: 30%; " onclick="addNote()" type="button" class="btn btn-secondary">Add Note</button>
+          </div>
+          <div class="col-md-12">
+            <ul id="notesList" class="list-group">
+              <li onclick="removeNotif(this)" class="list-group-item">Take out the trash -Mom</li>
+              <li onclick="removeNotif(this)" class="list-group-item">Ian coming home late - 11/19</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Ingredients tab content -->
+    <div id="ingredients" class="container tab-pane fade"><br>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <button type="button" id="addIngredient" data-toggle="modal" data-target="#exampleModal">ADD INGREDIENT</button>
+        </div>
+      </div>
+      <br>
+      <div id="food-groups">
+        <div class="row justify-content-center">
+          <div id="all-btn" onclick="displayIngredients(this)" class="col-sm-3 col-md-2 img-icon container justify-content-center align-items-center d-flex">
+            <h1>ALL</h1>
+          </div>
+          <div id="dairy-btn" onclick="displayIngredients(this)" class="col-sm-3 col-md-2 img-icon container justify-content-center align-items-center d-flex">
+            <img class="img-icon" src="images/dairy.png">
+          </div>
+          <div class="col-sm-3 col-md-2 img-icon container justify-content-center align-items-center d-flex">
+            <img class="img-icon" src="images/meats.png">
+          </div>
+          <div class="col-sm-3 col-md-2 img-icon img-icon container justify-content-center align-items-center d-flex">
+            <img class="img-icon" src="images/fruits.png">
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-sm-3 col-md-2 img-icon container justify-content-center align-items-center d-flex">
+            <img class="img-icon" src="images/vegetables.png">
+          </div>
+          <div class="col-sm-3 col-md-2 img-icon container justify-content-center align-items-center d-flex">
+            <img class="img-icon" src="images/grains.png">
+          </div>
+          <div class="col-sm-3 col-md-2 img-icon container justify-content-center align-items-center d-flex">
+            <img class="img-icon" src="images/beverages.png">
+          </div>
+          <div class="col-sm-3 col-md-2 img-icon container justify-content-center align-items-center d-flex">
+            <img class="img-icon" src="images/snacks.png">
+          </div>
+        </div>
+      </div>
+      
+      <div id="dairyList" class="container">
+        <button type="button" id="backIngredients" onclick="backToIngredients()" class="btn btn-secondary">Back</button>
+        </br></br>
+        <h2>Dairy</h2>
+        <!--Ingredients list (filtered by food group)-->
+        <table id="dairyTable" class="table table-hover table-responsive w-100 d-block d-md-table">
+          <thead>
+            <tr>
+              <th>Ingredient</th>
+              <th>Expiration Date</th>
+              <th class="table-header">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Lactose-free milk</td>
+              <td>04-22-2019</td>
+              <td class="removeIngredient" id="0" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Cheese</td>
+              <td>09-19-1999</td>
+              <td class="removeIngredient" id="1" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Yogurt</td>
+              <td>12-24-1221</td>
+              <td class="removeIngredient" id="2" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div id="ingredientsList" class="container">
+        <button type="button" id="backIngredients" onclick="backToIngredients()" class="btn btn-secondary">Back</button>
+        </br></br>
+        <h2>All Ingredients</h2>
+        <!--Ingredients list (filtered by food group)-->
+        <table id="ingredientsTable" class="table table-hover table-responsive w-100 d-block d-md-table">
+          <thead>
+            <tr>
+              <th>Ingredient</th>
+              <th>Expiration Date</th>
+              <th class="table-header">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bread</td>
+              <td>04-21-2019</td>
+              <td class="removeIngredient" id="0" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Peanut Butter</td>
+              <td>10-20-2020</td>
+              <td class="removeIngredient" id="1" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Grape Jelly</td>
+              <td>08-12-2021</td>
+              <td class="removeIngredient" id="2" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Lactose-free milk</td>
+              <td>04-22-2019</td>
+              <td class="removeIngredient" id="3" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Cheese</td>
+              <td>09-19-1999</td>
+              <td class="removeIngredient" id="4" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Yogurt</td>
+              <td>12-24-1221</td>
+              <td class="removeIngredient" id="5" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Sausage links</td>
+              <td>02-24-1421</td>
+              <td class="removeIngredient" id="6" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Avacados</td>
+              <td>11-22-2021</td>
+              <td class="removeIngredient" id="7" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Pasta</td>
+              <td>02-06-2301</td>
+              <td class="removeIngredient" id="8" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Clementines</td>
+              <td>05-27-1921</td>
+              <td class="removeIngredient" id="9" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>BBQ chips</td>
+              <td>11-10-2019</td>
+              <td class="removeIngredient" id="10" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Coca Cola</td>
+              <td>08-22-2012</td>
+              <td class="removeIngredient" id="11" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Lettuce</td>
+              <td>08-22-2022</td>
+              <td class="removeIngredient" id="12" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Hamburger bun</td>
+              <td>10-23-1222</td>
+              <td class="removeIngredient" id="13" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Beef patty</td>
+              <td>05-05-1322</td>
+              <td class="removeIngredient" id="14" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Garlic cloves</td>
+              <td>02-15-1982</td>
+              <td class="removeIngredient" id="15" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Butter</td>
+              <td>10-24-2231</td>
+              <td class="removeIngredient" id="15" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Olive oil</td>
+              <td>08-21-2241</td>
+              <td class="removeIngredient" id="16" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Lemon juice</td>
+              <td>12-01-1231</td>
+              <td class="removeIngredient" id="17" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Pepper</td>
+              <td>10-24-2231</td>
+              <td class="removeIngredient" id="18" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Dried oregano</td>
+              <td>10-24-2231</td>
+              <td class="removeIngredient" id="19" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Parmesan cheese</td>
+              <td>06-20-2231</td>
+              <td class="removeIngredient" id="20" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Dried bread crumbs</td>
+              <td>11-24-2231</td>
+              <td class="removeIngredient" id="21" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Parsley</td>
+              <td>02-20-4231</td>
+              <td class="removeIngredient" id="22" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>Angel hair pasta</td>
+              <td>12-26-1261</td>
+              <td class="removeIngredient" id="23" onclick="removeIngredient(this)"><i class="fas fa-trash"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal fade" id="exampleModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <label><b>Ingredient</b></label>
+              <input name="name" placeholder="food" type="text"><br>
+              <label><b>Food Group</b></label>
+              <select>
+                <option>Dairy</option>
+                <option>Meats</option>
+                <option>Fruits</option>
+                <option>Vegetables</option>
+                <option>Grains</option>
+                <option>Beverages</option>
+                <option>Snacks</option>
+              </select><br>
+              <label><b>Expiration Date</b></label>
+              <input type="date" name="expr_date"><br>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              <button onclick="addIngredient()" type="button" class="btn btn-success" data-dismiss="modal">Add Ingredient</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Recipes tab content -->
+    <div id="recipes" class="container tab-pane fade"><br>
+      <button type="button" id="backRecipes" onclick="backToRecipes()" class="btn btn-secondary">Back</button>
+      <div class="row justify-content-around">
+        <div id="recipe-options">
+          <div class="row justify-content-center">
+            <!-- Ready Recipes -->
+            <div id="ready-recipes" onclick="displayRecipes(this)" class="col-sm-6 recipeList-icon container justify-content-center align-items-center d-flex">
+              <h2>READY RECIPES</h2>
+              <img class="recipeList-icon" src="images/like.png">
+            </div>
+            <!-- All Recipes -->
+            <div id="remaining-recipes" onclick="displayRecipes(this)" class="col-sm-6 recipeList-icon container justify-content-center align-items-center d-flex">
+              <h2>REMAINING RECIPES</h2>
+              <img class="recipeList-icon" src="images/book.png">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Remainingx recipes -->
+        <div id="remainingRecipesList" class="col-md-12">
+          <h2 style="padding-top: 1rem">Remaining Recipes</h2>
+          <div class="col-md-12">
+            <ul class="list">
+              <table id="remainingRecipesTable" class="table table-hover table-responsive w-100 d-block d-md-table">
+                <tbody>
+                  <!-- <tr name="pbj" class="makeable" onclick="document.getElementById('pbj').style.display='block'"><td>PB&J Sandwich</td></tr> -->
+                  <tr class="almostMakeable"><td>3 Envelope Chicken Roasy</td></tr>
+                  <tr class="almostMakeable"><td>8 Hour Beef Stew</td></tr>
+                  <tr class="almostMakeable"><td>BBQ Rib</td></tr>
+                  <tr name="hamburger" class="almostMakeable"onclick="document.getElementById('hamburger').style.display='block'"><td>Hamburger</td></tr>
+                  <tr class="almostMakeable"onclick="document.getElementById('scamp').style.display='block'"><td>Shrimp Scampi</td></tr>
+                  <tr class="notMakeable"><td>Cheesy Baked Ravioli</td></tr>
+                  <tr class="notMakeable"><td>Chicken Satay Wraps</td></tr>
+                  <tr class="notMakeable"><td>Eggplant Lasagna</td></tr>
+                  <tr class="notMakeable"><td>Grilled Salmon</td></tr>
+                  <tr class="notMakeable"><td>Kicky Steak Strips with Rice</td></tr>
+                </table>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Ready recipes -->
+        <div id="readyRecipesList" class="col-md-12">
+            <h2 style="padding-top: 1rem">Ready Recipes</h2>
+            <div class="col-md-12">
+              <ul class="list">
+                <table class="table table-hover table-responsive w-100 d-block d-md-table">
+                  <tbody>
+                    <tr class="makeable" onclick="document.getElementById('pbj').style.display='block'"><td>PB&J Sandwich</td></tr>
+                  </table>  
+              </ul>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- PB&J Sample Recipe Page -->
+    <div id="pbj" class="modal">
+      <form class="modal-content animate">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('pbj').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+        
+        <div class="home-content3 bgimg-pbj">
+          <div style="overflow-y: hidden" class="container transbox">
+            <h1>PB&J Sandwich</h1>
+            <hr>
+            <h3 style="text-align: left">Ingredients:</h3>
+            <br>
+            <div class="recipeIngredientsMobile">
+              <ul>
+                <li><span class="makeable" onclick="addToCart(this)">Bread</span></li>
+                <li><span class="makeable" onclick="addToCart(this)">Peanut Butter</span></li>
+                <li><span class="makeable" onclick="addToCart(this)">Grape Jelly</span></li>
+              </ul>
+            </div>
+            <div class="recipeIngredientsFridge" style="margin-top:-10px;">
+              <ul>
+                <li><span class="makeable">Bread</span></li>
+                <li><span class="makeable">Peanut butter</span></li>
+                <li><span class="makeable">Grape Jelly</span></li>
+              </ul>
+            </div>
+            <br>
+            <div class="below">
+              <h3 style="text-align: left">Cooking Instructions:</h3>
+              <br>
+              <ul style="list-style-type:none;">
+                <li><div class="mr-3 nav-img number"style="float:left;">1</div>
+                  <span class="makeable">Take out 2 slices of bread.</span>
+                </li>
+                <br>
+                <li><div class="mr-3 nav-img number"style="float:left;">2</div>
+                  <span class="makeable">Using a butterknife, evenly spread the peanut butter on one slice.</span>
+                </li>
+                <br>
+                <li><div class="mr-3 nav-img number"style="float:left;">3</div>
+                  <span class="makeable">On the other slice, repeat the same action for jelly.</span>
+                </li>
+                <br>
+                <li><div class="mr-3 nav-img number"style="float:left;">4</div>
+                  <span class="makeable">Close the two slices of bread together and enjoy your sandwich!</span>
+                </li>
+                <br>
+              </ul>
+              <br>
+              <br>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!--scampi recipe -->
+    <div id="scamp" class="modal">
+      <form class="modal-content animate">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('scamp').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+
+        <div class="home-content3 bgimg-scampi">
+          <div style="overflow-y: hidden" class="container transbox">
+            <h1>Shrimp Scampi</h1>
+            <hr>
+            <h3 style="text-align: left">Ingredients:</h3>
+            <br>
+            <ul class="recipeIngredientsMobile">
+              <li><span class="makeable" onclick="addToCart(this)">3 to 4 garlic cloves, minced</span></li>
+              <li><span class="makeable" onclick="addToCart(this)">1/4 cup butter, cubed</span></li>
+              <li><span class="makeable" onclick="addToCart(this)">1/4 cup olive oil</span></li>
+              <li><span class="notMakeable" onclick="addToCart(this)">1 pound uncooked medium shrimp</span></li>
+              <li><span class="makeable" onclick="addToCart(this)">1/4 cup lemon juice</span></li>
+              <li><span class="makeable" onclick="addToCart(this)">1/2 teaspoon pepper</span></li>
+              <li><span class="makeable" onclick="addToCart(this)">1/4 teaspoon dried oregano</span></li>
+              <li><span class="makeable" onclick="addToCart(this)">1/2 cup grated Parmesan cheese</span></li>
+              <li><span class="makeable" onclick="addToCart(this)">1/4 cup dry bread crumbs</span></li>
+              <li><span class="makeable" onclick="addToCart(this)">1/4 cup minced fresh parsley</span></li>
+              <li><span class="makeable" onclick="addToCart(this)">Angel hair pasta</span></li>
+            </ul>
+            <div class="recipeIngredientsFridge" style="margin-top:-10px;">
+              <ul style="float:left">
+                <li><span class="makeable">3 to 4 garlic cloves, minced</span></li>
+                <li><span class="makeable">1/4 cup butter, cubed</span></li>
+                <li><span class="makeable">1/4 cup olive oil</span></li>
+                <li><span class="notMakeable">1 pound uncooked medium shrimp</span></li>
+                <li><span class="makeable">1/4 cup lemon juice</span></li>
+                <li><span class="makeable">1/2 teaspoon pepper</span></li>
+              </ul>
+
+              <ul style="float:right; margin-right:30px;">
+                <li><span class="makeable">1/4 teaspoon dried oregano</span></li>
+                <li><span class="makeable">1/2 cup grated Parmesan cheese</span></li>
+                <li><span class="makeable">1/4 cup dry bread crumbs</span></li>
+                <li><span class="makeable">1/4 cup minced fresh parsley</span></li>
+                <li><span class="makeable">Angel hair pasta</span></li>
+              </ul>
+            </div>
+            <br>
+            <div class="below">
+              <h3 style="text-align: left">Cooking Instructions:</h3>
+              <br>
+              <ul style="list-style-type:none;">
+                <li><div class="mr-3 nav-img number"style="float:left;">1</div>
+                  <span class="notMakeable">In a 10-in. skillet, saute garlic in butter and
+                    oil until fragrant. Add the shrimp, lemon juice, pepper and oregano; stir until shrimp turn pink.</span>
+                </li>
+                <br>
+                <li><div class="mr-3 nav-img number"style="float:left;">2</div>
+                  <span class="makeable">Broil 6 in. from the heat for 2-3 minutes or until
+                    topping is golden brown. Constantly stir as to prevent sticking. </span>
+                </li>
+                <br>
+                <li><div class="mr-3 nav-img number"style="float:left;">3</div>
+                  <span class="makeable">Serve with pasta. Sprinkle remaining grated Parmesan
+                  cheese, bread crumbs, and parsley.</span>
+                </li>
+                <br>
+              </ul>
+              <br>
+              <br>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Hamburger Sample Recipe Page -->
+    <div id="hamburger" class="modal">
+      <form class="modal-content animate">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('hamburger').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+        
+        <div class="home-content3 bgimg-hamburger">
+          <div style="overflow-y: hidden" class="container transbox">
+            <h1>Hamburger</h1>
+            <hr>
+            <h3 style="text-align: left">Ingredients:</h3>
+            <br>
+            <ul class="recipeIngredientsMobile">
+                <li><span class="makeable" onclick="addToCart(this)">Hamburger bun</span></li>
+                <li><span class="makeable" onclick="addToCart(this)">Beef patty</span></li>
+                <li><span class="makeable" onclick="addToCart(this)">Lettuce</span></li>
+                <li><span class="notMakeable" onclick="addToCart(this)">Tomato</span></li>
+                <li><span class="makeable" onclick="addToCart(this)">Cheese</span></li>
+            </ul>
+            <div class="recipeIngredientsFridge" style="margin-top:-10px;">
+              <ul class="recipeIngredientsFridge">
+                <li><span class="makeable">Hamburger bun</span></li>
+                <li><span class="makeable">Beef patty</span></li>
+                <li><span class="makeable">Lettuce</span></li>
+                <li><span class="notMakeable">Tomato</span></li>
+                <li><span class="makeable">Cheese</span></li>
+              </ul>
+            </div>
+            <br>
+            <div class="below">
+              <h3 style="text-align: left">Cooking Instructions:</h3>
+              <br>
+              <ul style="list-style-type:none;">
+                <li><div class="mr-3 nav-img number"style="float:left;">1</div>
+                  <span class="makeable">Cook the patty.</span>
+                </li>
+                <br>
+                <li><div class="mr-3 nav-img number"style="float:left;">2</div>
+                  <span class="notMakeable">Wash the lettuce and tomatoes.</span>
+                </li>
+                <br>
+                <li><div class="mr-3 nav-img number"style="float:left;">3</div>
+                  <span class="makeable">Place the patty on the bun, then the cheese.</span>
+                </li>
+                <br>
+                <li><div class="mr-3 nav-img number"style="float:left;">4</div>
+                  <span class="notMakeable">Add the lettuce and tomatoes on top, followed by the bun.</span>
+                </li>
+                <br>
+              </ul>
+              <br>
+              <br>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Settings tab content -->
+    <div id="settings" class="container tab-pane fade"><br>
+      <h1>Settings</h1>
+      <hr>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="slider-container">
+            <h4>Temperature</h4>
+            <input id="tempInput" class="slider" type="range" min="32" max="40" value="50">
+            <p><span id="tempOutput"></span> &#8457</p>
+          </div>
+        </div>
+
+        <hr>
+        <div class="row justify-content-center">
+          <h4>Economy Mode</h4>
+          <div class="switches">
+            <label class="switch">
+              <input class="switch-input" type="checkbox" />
+              <span class="switch-label" data-on="ON" data-off="OFF"></span><span class="switch-handle"></span>
+            </label>
+          </div>
+        </div>
+
+        <hr>
+        <div class="row justify-content-center">
+          <h4>Freezer Lock</h4>
+          <div class="switches">
+            <label class="switch">
+              <input class="switch-input" type="checkbox" />
+              <span class="switch-label" data-on="ON" data-off="OFF"></span><span class="switch-handle"></span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Cart tab content -->
+    <div id="cart" class="container tab-pane fade"><br>
+      <div class="row justify-content-around">
+        <div id="cartList" class="col-md-12">
+          <div class="col-md-12">
+            <ul class="list">
+              <table id="shoppingList" class="table table-hover table-responsive w-100 d-block d-md-table">
+                <thead>
+                  <tr>
+                    <th><h1>Shopping Cart</h1></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Romaine lettuce</td></tr>
+                  <tr><td>Tomatoes</td></tr>
+                  <tr><td>Whole wheat bread</td></tr>
+                  <tr><td>Eggs</td></tr>
+                  <tr><td>Roasted ham</td></tr>
+                  <tr><td>A college degree</td></tr>
+                  <tr><td>Peanut butter</td></tr>
+                  <tr><td>Cereal</td></tr>
+                  <tr><td>Milk</td></tr>
+                  <tr><td>Orange juice</td></tr>
+                  <tr><td>Croissants</td></tr>
+                  <tr><td>Waffle mix</td></tr>
+                  <tr><td>A will to live</td></tr>
+                </tbody>
+              </table>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<script src="index.js"></script>
+</html>

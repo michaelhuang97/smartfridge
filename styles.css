@@ -1,0 +1,502 @@
+/* ----------------------------------- PRIMARY ----------------------------------- */
+#cart-tab {
+  display: none;
+  
+}
+.sm-scrn {
+  display: none;
+}
+/* MOBILE APP SETTINGS */
+@media (max-width: 450px) {
+  #cart-tab {
+    display: inline-block;
+  }
+  .lg-scrn {
+    display: none;
+  }
+  .sm-scrn {
+    display: block;
+  }
+  .nav-item {
+    width:20%;
+    text-align: center;
+  }
+
+  #date, #time {
+    display: none;
+  }
+  
+}
+
+/* ----------------------------------- MAIN PAGE ----------------------------------- */
+body {
+  background-image: url("images/sunlight.jpg");
+}
+#temp {
+  display: none;
+}
+.big-text {
+  font-size: 8rem;
+  color: white;
+}
+#date-time {
+  height: calc(80vh-50vh);
+  overflow-y: hidden;
+}
+#date {
+  margin-bottom: 1.5rem;
+}
+#background {
+  max-width: 100%;
+  max-height: 100vh;
+  margin: auto;
+}
+#quick-recipes, #notifications {
+  background-color: #ededed;
+  height: calc(100vh - 50vh);
+  overflow-y: auto;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+#notes {
+  background-color: #ededed;
+  height: calc(100vh - 20vh);
+  overflow-y: auto;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+li.list-group-item {
+  background-color: #ededed;
+}
+li.list-group-item:hover {
+  -webkit-filter: brightness(90%);
+}
+#quick-recipes {
+  padding-right: 1rem;
+}
+#notifications {
+  padding-left: 1rem;
+}
+#quick-recipes h2, #notifications h2 {
+  margin-top: 1rem;
+}
+h1, h2, h4 {
+  text-align: center;
+}
+ul.list {
+  list-style: none;
+  margin-left: -1.5rem;
+}
+li.nav-item {
+  background-color: white;
+  width: 25%;
+  text-align: center;
+}
+@media (max-width: 450px) {
+  li.nav-item {
+    width: 20%;
+  }
+  #temp {
+      display: block;
+  }
+}
+/* ----------------------------------- INGREDIENTS ----------------------------------- */
+.makeable {		
+  color: green;
+}		
+.almostMakeable {		
+  color: #f1c40f;		
+}		
+.notMakeable {		
+  color: #c0392b		
+}
+img.img-icon {
+  width: calc(80vh/4);
+  height: calc(80vh/4);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+img.recipeList-icon {
+  width: calc(80vh/3);
+  height: calc(80vh/3);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+div.img-icon:hover, div.recipeList-icon:hover {
+  -webkit-filter: brightness(90%);
+}
+div.img-icon {
+  background-color: #ededed;
+  border-radius: 1rem;
+  margin: 0.5rem;
+}
+div.recipeList-icon {
+  background-color: #ededed;
+  border-radius: 1rem;
+  margin: 1rem;
+}
+#dairyList, #ingredientsList {
+  display: none;
+  background-color: #ededed;
+  border-radius: 1rem;
+}
+#addIngredient {
+  border: 0px solid;
+  background-color: #B0FF92;
+  width: 100%;
+  font-size: 2rem;
+  color: white;
+  border-radius: 1rem;
+  font-weight: bold;
+}
+#addIngredient:hover {
+  -webkit-filter: brightness(90%);
+}
+.removeIngredient, .table-header {
+  text-align: center;
+}
+input, select {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+/* ----------------------------------- RECIPES ----------------------------------- */
+#backRecipes {
+  display: none;
+}
+.acct {
+  width: 80px;
+}
+.recipe {
+ font-family: 'Corben', Georgia, Times, serif;
+}
+.recipeWords {
+  font-family: 'Nobile', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 25px;
+}
+.below{
+  clear:both
+}
+.number {
+  font-size: 30px;
+  color: purple;
+  font-weight: bold;
+}
+.bgimg-scampi {
+    background-image: url('images/shrimp.jpg');
+    display: block;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    background-repeat: no-repeat;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.bgimg-pbj {
+  background-image: url('images/pbj.png');
+  display: block;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-repeat: no-repeat;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  padding-bottom: 2rem;
+}
+.bgimg-hamburger {
+  background-image: url('images/hamburger.jpg');
+  display: block;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-repeat: no-repeat;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.bgimg_fake {
+    background-image: url('images/food.jpg');
+    display: block;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    background-repeat: no-repeat;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+div.transbox {
+  background-color: #ffffff;
+  width: 80%;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+div.transbox li {
+  font-weight: bold;
+  color: #000000;
+}
+.recipeIngredientsMobile {
+  display: none;
+}
+@media (max-width: 450px) {
+  .recipeIngredientsMobile {
+    display: block;
+  }
+  .recipeIngredientsFridge {
+    display: none;
+  }
+}
+#remainingRecipesList, #readyRecipesList {
+  display: none;
+  background-color: #ededed;
+  height: 100vh;
+  overflow-y: auto;
+  border-radius: 1rem;
+}
+
+#pbj-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+button:hover {
+  opacity: 0.8;
+}
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+.container {
+  padding: 16px;
+}
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: -25px;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+      display: block;
+      float: none;
+  }
+  .cancelbtn {
+      width: 100%;
+  }
+}
+green{
+  color:rgb(15, 155, 15)
+}
+red{
+  color:rgb(167, 10, 10)
+}
+yellow{
+  color:rgb(160, 160, 7)
+}
+/* ----------------------------------- SETTINGS ----------------------------------- */
+#settings {
+  background-color: #ededed;
+  height: 90vh;
+  margin-top: 1rem;
+  border-radius: 1rem;
+}
+.slider-container {
+  width: 15rem;
+  text-align: center;
+  font-weight: bold;
+}
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: blue;
+  cursor: pointer;
+}
+
+.switch {
+    position: relative;
+    display: block;
+    width: 100px;
+    height: 30px;
+    padding: 3px;
+    margin: 0 10px 10px 0;
+    border-radius: 18px;
+    cursor: pointer;
+  }
+  .switch-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  .switch-label {
+    position: relative;
+    display: block;
+    height: inherit;
+    font-size: 10px;
+    background: red;
+    border-radius: inherit;
+  }
+  .switch-label:before, .switch-label:after {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5em;
+    line-height: 1;
+    -webkit-transition: inherit;
+    -moz-transition: inherit;
+    -o-transition: inherit;
+    transition: inherit;
+  }
+  .switch-label:before {
+    content: attr(data-off);
+    right: 11px;
+    color: white;
+  }
+  .switch-label:after {
+    content: attr(data-on);
+    left: 11px;
+    color: #FFFFFF;
+    opacity: 0;
+  }
+  .switch-input:checked ~ .switch-label {
+       background: green;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+  }
+  .switch-input:checked ~ .switch-label:before {
+    opacity: 0;
+  }
+  .switch-input:checked ~ .switch-label:after {
+    opacity: 1;
+  }
+  .switch-handle {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
+    background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
+    border-radius: 100%;
+  }
+
+  .switch-input:checked ~ .switch-handle {
+    left: 74px;
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .switches {
+    padding-left: 8px;
+  }
+
+  /* ----------------------------------- CART ----------------------------------- */
+  #cartList {
+    background-color: #ededed;
+    height: 100vh;
+    overflow-y: auto;
+    border-radius: 1rem;
+  }
