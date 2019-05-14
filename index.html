@@ -48,7 +48,7 @@
         </div>
         <!-- Quick recipes -->
         <div id="quick-recipes" class="col-md-5">
-          <h2>Quick Recipes <a style="color: grey" href="#" data-trigger="focus" data-toggle="popover" data-placement="left" title="Quick Recipes" data-content="Recipes where you have all the ingredients in your inventory"><i style="font-size: 1rem" class="fas fa-question-circle"></i></a></h2>
+          <h2>Quick Recipes <a style="color: grey" href="#" data-trigger="focus" data-toggle="popover" data-placement="bottom" title="Quick Recipes" data-content="Recipes where you have all the ingredients in your inventory"><i style="font-size: 1rem" class="fas fa-question-circle"></i></a></h2>
           <div class="col-md-12">
             <ul class="list">
               <table id="quick-table" class="table table-hover table-responsive w-100 d-block d-md-table">
@@ -373,7 +373,7 @@
         
         <!-- Remaining recipes -->
         <div id="allRecipesList" class="col-md-12">
-          <h2 style="padding-top: 1rem">All Recipes <a style="color: grey" href="#" data-trigger="focus" data-toggle="popover" data-placement="left" title="Recipe Colors" data-content="Green: makeable, Yellow: almost makeable, Red: not makeable"><i style="font-size: 1rem" class="fas fa-question-circle"></i></a></h2>
+          <h2 style="padding-top: 1rem">All Recipes <a style="color: grey" href="#" data-trigger="focus" data-toggle="popover" data-placement="bottom" title="Recipe Colors" data-content="Green: makeable, Yellow: almost makeable, Red: not makeable"><i style="font-size: 1rem" class="fas fa-question-circle"></i></a></h2>
           <div class="col-md-12">
             <ul class="list">
               <table id="allRecipesTable" class="table table-hover table-responsive w-100 d-block d-md-table">
@@ -425,9 +425,11 @@
             <hr>
             <h3 style="text-align: left">Ingredients:</h3>
             <br>
-            <li><span class="makeable">Bread <i class="fas fa-shopping-cart" onclick="addToCart(this)"></i></span></li>
-            <li><span class="makeable">Peanut Butter <i class="fas fa-shopping-cart" onclick="addToCart(this)"></i></span></li>
-            <li><span class="makeable">Grape Jelly <i class="fas fa-shopping-cart" onclick="addToCart(this)"></i></span></li>
+            <ul>
+              <li><span class="makeable">Bread <i class="fas fa-shopping-cart" onclick="addToCart(this)"></i></span></li>
+              <li><span class="makeable">Peanut Butter <i class="fas fa-shopping-cart" onclick="addToCart(this)"></i></span></li>
+              <li><span class="makeable">Grape Jelly <i class="fas fa-shopping-cart" onclick="addToCart(this)"></i></span></li>
+            </ul>
             <br>
             <div class="below">
               <h3 style="text-align: left">Cooking Instructions:</h3>
@@ -531,22 +533,13 @@
             <hr>
             <h3 style="text-align: left">Ingredients:</h3>
             <br>
-            <ul class="recipeIngredientsMobile">
+            <ul>
                 <li><span class="makeable">Hamburger bun <i class="fas fa-shopping-cart" onclick="addToCart(this)"></i></span></li>
                 <li><span class="makeable">Beef patty <i class="fas fa-shopping-cart" onclick="addToCart(this)"></i></span></li>
                 <li><span class="makeable">Lettuce <i class="fas fa-shopping-cart" onclick="addToCart(this)"></i></span></li>
                 <li><span class="notMakeable">Tomato <i class="fas fa-shopping-cart" onclick="addToCart(this)"></i></span></li>
                 <li><span class="makeable">Cheese <i class="fas fa-shopping-cart" onclick="addToCart(this)"></i></span></li>
             </ul>
-            <div class="recipeIngredientsFridge" style="margin-top:-10px;">
-              <ul class="recipeIngredientsFridge">
-                <li><span class="makeable">Hamburger bun</span></li>
-                <li><span class="makeable">Beef patty</span></li>
-                <li><span class="makeable">Lettuce</span></li>
-                <li><span class="notMakeable">Tomato</span></li>
-                <li><span class="makeable">Cheese</span></li>
-              </ul>
-            </div>
             <br>
             <div class="below">
               <h3 style="text-align: left">Cooking Instructions:</h3>
