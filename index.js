@@ -1,3 +1,6 @@
+document.getElementById("validIngredient").innerHTML = "";
+document.getElementById("validDate").innerHTML = "";
+
 //DATE + TIME
 var weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 var months = ['January','February','March','April','May','June','July', 'August', 'September', 'October', 'November', 'December'];
@@ -21,7 +24,7 @@ function addNote() {
 }
 function addNoteHelper() {
   newNote = document.getElementById("newNote").value;
-  notesList.innerHTML += "<li onclick=\"removeNotif(this)\" class=\"list-group-item\">" + newNote + "</li>";
+  notesList.innerHTML += "<li class=\"list-group-item\">" + newNote + "<i class=\"fas fa-trash\" style=\"float: right\" onclick=\"removeNotif(this.parentElement)\"></i></li>";
   var f = document.getElementById("form");
   f.parentNode.removeChild(f);
 }
@@ -40,7 +43,7 @@ $("#dairy-btn").click(function() {
   $("#addIngredient").text("ADD DAIRY");
 });
 $("#backIngredients").click(function() {
-  $("#addIngredient").text("ADD INGREDIENT");
+  $("#addIngredient").text("ADD ITEM");
 });
 function backToIngredients() {
   document.getElementById("food-groups").style.display = "block";
@@ -62,13 +65,40 @@ function addIngredient() {
   newRow.appendChild(expr_date);
   newRow.appendChild(remove);
   var date = document.getElementsByName("expr_date")[0].value.split("-");
-  ingredient.innerHTML = document.getElementsByName("name")[0].value;
-  expr_date.innerHTML = `${date[1]}-${date[2]}-${date[0]}`;
-  remove.innerHTML= '<i class="fas fa-trash"></i>';
-  tbody.appendChild(newRow);
-  document.getElementsByName("name")[0].value = "";
-  document.getElementsByName("expr_date")[0].value = "";
-  updateRecipes();
+
+  var month = `${date[1]}`;
+  var day = `${date[2]}`;
+  var year = `${date[0]}`;
+  var validDate = true;
+  var validName = true;
+
+  if (month == "" || day == "" || year == "" || parseInt(month) > 12 || parseInt(day) > 31 || parseInt(year) > 2019) {
+    document.getElementById('validDate').innerHTML = "<i style=\"color: grey\">Please provide a valid expiration date</i>";
+    validDate = false;
+  }
+  if (document.getElementsByName("name")[0].value == "") {
+    document.getElementById('validIngredient').innerHTML = "<i style=\"color: grey\">Please provide a name for the item</i>";
+    validName = false;
+  }
+  
+  if (validDate == false && validName == true) {  
+    document.getElementById('validDate').innerHTML = "<i style=\"color: grey\">Please provide a valid expiration date</i>";
+    document.getElementById('validIngredient').innerHTML = "";
+  } else if (validDate == true && validName == false) {
+    document.getElementById('validIngredient').innerHTML = "<i style=\"color: grey\">Please provide a name for the item</i>";
+    document.getElementById('validDate').innerHTML = "";
+  } else {
+    ingredient.innerHTML = document.getElementsByName("name")[0].value;
+    expr_date.innerHTML = `${date[1]}-${date[2]}-${date[0]}`;
+    remove.innerHTML= '<i class="fas fa-trash"></i>';
+    tbody.appendChild(newRow);
+    document.getElementsByName("name")[0].value = "";
+    document.getElementsByName("expr_date")[0].value = "";
+    updateRecipes();
+
+    document.getElementById('validDate').innerHTML = "";
+    document.getElementById('validIngredient').innerHTML = "";
+  }
 }
 //REMOVE INGREDIENTS
 function removeIngredient(elt) {
@@ -79,19 +109,19 @@ function removeIngredient(elt) {
 function displayRecipes(elt) {
   document.getElementById("recipe-options").style.display = "none";
   document.getElementById("backRecipes").style.display = "block";
-  if (elt.id == "remaining-recipes") {
-    document.getElementById("remainingRecipesList").style.display = "block";  
-    document.getElementById("readyRecipesList").style.display = "none";
+  if (elt.id == "all-recipes") {
+    document.getElementById("allRecipesList").style.display = "block";  
+    document.getElementById("favRecipesList").style.display = "none";
   } else {
-    document.getElementById("remainingRecipesList").style.display = "none";
-    document.getElementById("readyRecipesList").style.display = "block";
+    document.getElementById("allRecipesList").style.display = "none";
+    document.getElementById("favRecipesList").style.display = "block";
   }
 }
 function backToRecipes() {
   document.getElementById("backRecipes").style.display = "none";
   document.getElementById("recipe-options").style.display = "block";
-  document.getElementById("remainingRecipesList").style.display = "none";
-  document.getElementById("readyRecipesList").style.display = "none";
+  document.getElementById("allRecipesList").style.display = "none";
+  document.getElementById("favRecipesList").style.display = "none";
 }
 
 //SETTINGS
@@ -130,7 +160,7 @@ function addToCart(elt) {
     var newRow = document.createElement("tr");
     var td = document.createElement("td");
 
-    td.innerHTML = elt.innerHTML;
+    td.innerHTML = elt.innerHTML + "<i class=\"fas fa-window-close\" style=\"float: right\" onclick=\"removeNotif(this.parentElement)\"></i>";
     newRow.appendChild(td);
     tbody.prepend(newRow);
   }
@@ -146,8 +176,8 @@ function updateRecipes() {
     all_ingredients.push(tbody[i].children[0].textContent);
   }
 
-  //grab the remaining recipe ingredients
-  var recipeTable = document.getElementById("remainingRecipesTable");
+  //grab all recipe ingredients
+  var recipeTable = document.getElementById("allRecipesTable");
   var tbody = recipeTable.children[0].children;
   var recipes = []
   for (let i = 0; i < tbody.length; i++) {
@@ -197,7 +227,7 @@ function updateRecipes() {
       t1[0].className = "makeable";
       console.log(t1[0]);
 
-      var rdy = document.getElementById("readyRecipesList");
+      var rdy = document.getElementById("favRecipesList");
       console.log(rdy.children[1].children[0].children[0].children[0]);
 
       var cloned = t1[0].cloneNode(true);
@@ -207,12 +237,12 @@ function updateRecipes() {
       quick.children[0].prepend(cloned)
       //console.log(quick.children[0]);
 
-      var art = document.getElementById("remainingRecipesTable");
+      var art = document.getElementById("allRecipesTable");
       //art.children[0].prepend(cloned);
     }
     /*
     else{
-      var tempy = document.getElementById("remainingRecipesTable");
+      var tempy = document.getElementById("allRecipesTable");
       var t1 = document.getElementsByName(curr_recipe.id);
       console.log(t1);
       tempy.children[0].appendChild(t1[0]);
@@ -226,3 +256,20 @@ function updateRecipes() {
 function firstload(){
   updateRecipes();
 }
+
+/* Update username in Settings */
+function changeUserName() {
+  let newUserName = document.getElementById("newUserName").value;
+  let usernameDisplay = document.getElementById("userName");
+  let notif = document.getElementById("nameChangeNotif");
+
+  if (newUserName != usernameDisplay.innerHTML) {
+    usernameDisplay.innerHTML = newUserName;
+    notif.innerHTML = "<i>Name changed successfully</i>"
+  } else {
+    notif.innerHTML = ""
+  }
+}
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();   
+});

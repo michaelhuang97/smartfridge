@@ -1,16 +1,15 @@
 /* ----------------------------------- PRIMARY ----------------------------------- */
-#cart-tab {
+/* #cart-tab {
   display: none;
-  
-}
+} */
 .sm-scrn {
   display: none;
 }
 /* MOBILE APP SETTINGS */
 @media (max-width: 450px) {
-  #cart-tab {
+  /* #cart-tab {
     display: inline-block;
-  }
+  } */
   .lg-scrn {
     display: none;
   }
@@ -28,9 +27,18 @@
   
 }
 
+/* Navbar text color */
+.nav-item .nav-link {
+  color: #15c177;
+}
+.nav-pills .nav-link.active {
+  background-color: #15c177;
+}
 /* ----------------------------------- MAIN PAGE ----------------------------------- */
 body {
-  background-image: url("images/sunlight.jpg");
+  background: url("images/mountain\ bg.jpg") no-repeat;
+  background-size: cover;
+  image-rendering: -webkit-optimize-contrast;
 }
 #temp {
   display: none;
@@ -53,14 +61,15 @@ body {
 }
 #quick-recipes, #notifications {
   background-color: #ededed;
-  height: calc(100vh - 50vh);
+  height: auto;
   overflow-y: auto;
   border-radius: 1rem;
   margin-bottom: 1rem;
 }
 #notes {
   background-color: #ededed;
-  height: calc(100vh - 20vh);
+  height: auto;
+  padding-bottom: 2rem;
   overflow-y: auto;
   border-radius: 1rem;
   margin-bottom: 1rem;
@@ -89,7 +98,7 @@ ul.list {
 }
 li.nav-item {
   background-color: white;
-  width: 25%;
+  width: 20%;
   text-align: center;
 }
 @media (max-width: 450px) {
@@ -102,13 +111,22 @@ li.nav-item {
 }
 /* ----------------------------------- INGREDIENTS ----------------------------------- */
 .makeable {		
-  color: green;
+  color: #15c177;
+  font-weight: bold;
 }		
 .almostMakeable {		
-  color: #f1c40f;		
+  color: #e8a529;
+  font-weight: bold;
 }		
 .notMakeable {		
-  color: #c0392b		
+  color: #c0392b;
+  font-weight: bold;
+}
+.ingredientCategory {
+  position: absolute;
+  text-align: center;
+  color: white;
+  text-shadow: 3px 3px 4px black;
 }
 img.img-icon {
   width: calc(80vh/4);
@@ -142,7 +160,7 @@ div.recipeList-icon {
 }
 #addIngredient {
   border: 0px solid;
-  background-color: #B0FF92;
+  background-color: #15c177;
   width: 100%;
   font-size: 2rem;
   color: white;
@@ -198,7 +216,7 @@ input, select {
     padding-bottom: 2rem;
 }
 .bgimg-pbj {
-  background-image: url('images/pbj.png');
+  background-image: url('images/pbj.jpg');
   display: block;
   left: 0;
   top: 0;
@@ -209,6 +227,7 @@ input, select {
   -moz-background-size: cover;
   -webkit-background-size: cover;
   background-size: cover;
+  padding-top: 2rem;
   padding-bottom: 2rem;
 }
 .bgimg-hamburger {
@@ -243,7 +262,7 @@ div.transbox {
   background-color: #ffffff;
   width: 80%;
   border: 1px solid black;
-  opacity: 0.6;
+  opacity: 0.8;
   filter: alpha(opacity=60); /* For IE8 and earlier */
 }
 div.transbox li {
@@ -261,14 +280,13 @@ div.transbox li {
     display: none;
   }
 }
-#remainingRecipesList, #readyRecipesList {
+#allRecipesList, #favRecipesList {
   display: none;
   background-color: #ededed;
   height: 100vh;
   overflow-y: auto;
   border-radius: 1rem;
 }
-
 #pbj-img {
   display: block;
   margin-left: auto;
@@ -296,6 +314,9 @@ button {
 }
 button:hover {
   opacity: 0.8;
+}
+.btn-custom {
+  width: auto;
 }
 /* Extra styles for the cancel button */
 .cancelbtn {
@@ -390,7 +411,7 @@ yellow{
 /* ----------------------------------- SETTINGS ----------------------------------- */
 #settings {
   background-color: #ededed;
-  height: 90vh;
+  height: auto;
   margin-top: 1rem;
   border-radius: 1rem;
 }
@@ -419,84 +440,90 @@ yellow{
 }
 
 .switch {
-    position: relative;
-    display: block;
-    width: 100px;
-    height: 30px;
-    padding: 3px;
-    margin: 0 10px 10px 0;
-    border-radius: 18px;
-    cursor: pointer;
-  }
-  .switch-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-  }
-  .switch-label {
-    position: relative;
-    display: block;
-    height: inherit;
-    font-size: 10px;
-    background: red;
-    border-radius: inherit;
-  }
-  .switch-label:before, .switch-label:after {
-    position: absolute;
-    top: 50%;
-    margin-top: -.5em;
-    line-height: 1;
-    -webkit-transition: inherit;
-    -moz-transition: inherit;
-    -o-transition: inherit;
-    transition: inherit;
-  }
-  .switch-label:before {
-    content: attr(data-off);
-    right: 11px;
-    color: white;
-  }
-  .switch-label:after {
-    content: attr(data-on);
-    left: 11px;
-    color: #FFFFFF;
-    opacity: 0;
-  }
-  .switch-input:checked ~ .switch-label {
-       background: green;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
-  }
-  .switch-input:checked ~ .switch-label:before {
-    opacity: 0;
-  }
-  .switch-input:checked ~ .switch-label:after {
-    opacity: 1;
-  }
-  .switch-handle {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 28px;
-    height: 28px;
-    background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
-    background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
-    border-radius: 100%;
-  }
+  position: relative;
+  display: block;
+  width: 100px;
+  height: 30px;
+  padding: 3px;
+  margin: 0 10px 10px 0;
+  border-radius: 18px;
+  cursor: pointer;
+}
+.switch-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.switch-label {
+  position: relative;
+  display: block;
+  height: inherit;
+  font-size: 10px;
+  background: red;
+  border-radius: inherit;
+}
+.switch-label:before, .switch-label:after {
+  position: absolute;
+  top: 50%;
+  margin-top: -.5em;
+  line-height: 1;
+  -webkit-transition: inherit;
+  -moz-transition: inherit;
+  -o-transition: inherit;
+  transition: inherit;
+}
+.switch-label:before {
+  content: attr(data-off);
+  right: 11px;
+  color: white;
+}
+.switch-label:after {
+  content: attr(data-on);
+  left: 11px;
+  color: #FFFFFF;
+  opacity: 0;
+}
+.switch-input:checked ~ .switch-label {
+      background: green;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+}
+.switch-input:checked ~ .switch-label:before {
+  opacity: 0;
+}
+.switch-input:checked ~ .switch-label:after {
+  opacity: 1;
+}
+.switch-handle {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
+  background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
+  border-radius: 100%;
+}
 
-  .switch-input:checked ~ .switch-handle {
-    left: 74px;
-    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
-  }
+.switch-input:checked ~ .switch-handle {
+  left: 74px;
+  box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+}
 
-  .switches {
-    padding-left: 8px;
-  }
+.switches {
+  padding-left: 8px;
+}
 
-  /* ----------------------------------- CART ----------------------------------- */
-  #cartList {
-    background-color: #ededed;
-    height: 100vh;
-    overflow-y: auto;
-    border-radius: 1rem;
-  }
+.settingsHelp {
+  font-weight: normal;
+  font-size: 0.8rem;
+  font-style: italic;
+  text-align: center;
+}
+/* ----------------------------------- CART ----------------------------------- */
+#cartList {
+  background-color: #ededed;
+  height: 100vh;
+  overflow-y: auto;
+  border-radius: 1rem;
+}
