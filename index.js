@@ -72,7 +72,7 @@ function addIngredient() {
   var validDate = true;
   var validName = true;
 
-  if (month == "" || day == "" || year == "" || parseInt(month) > 12 || parseInt(day) > 31 || parseInt(year) > 2019) {
+  if (month == "" || day == "" || year == "" || parseInt(month) > 12 || parseInt(day) > 31 || parseInt(year) < 2010) {
     document.getElementById('validDate').innerHTML = "<i style=\"color: grey\">Please provide a valid expiration date</i>";
     validDate = false;
   }
@@ -153,14 +153,15 @@ window.onclick = function(event) {
 }
 //ADD TO SHOPPING CART
 function addToCart(elt) {
-  var confirmAdd = confirm(`Would you like to add ${elt.innerHTML} to shopping cart?`);
+  var ingredient = elt.innerHTML.slice(0, elt.innerHTML.length - 37);
+  var confirmAdd = confirm(`Would you like to add ${ingredient} to shopping cart?`);
   if (confirmAdd) {
     var shoppingList = document.getElementById("shoppingList");
     var tbody = shoppingList.children[1];
     var newRow = document.createElement("tr");
     var td = document.createElement("td");
 
-    td.innerHTML = elt.innerHTML + "<i class=\"fas fa-window-close\" style=\"float: right\" onclick=\"removeNotif(this.parentElement)\"></i>";
+    td.innerHTML = ingredient + "<i class=\"fas fa-window-close\" style=\"float: right\" onclick=\"removeNotif(this.parentElement)\"></i>";
     newRow.appendChild(td);
     tbody.prepend(newRow);
   }

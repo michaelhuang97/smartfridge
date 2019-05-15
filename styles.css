@@ -269,7 +269,7 @@ div.transbox li {
   font-weight: bold;
   color: #000000;
 }
-.recipeIngredientsMobile {
+/* .recipeIngredientsMobile {
   display: none;
 }
 @media (max-width: 450px) {
@@ -279,7 +279,7 @@ div.transbox li {
   .recipeIngredientsFridge {
     display: none;
   }
-}
+} */
 #allRecipesList, #favRecipesList {
   display: none;
   background-color: #ededed;
